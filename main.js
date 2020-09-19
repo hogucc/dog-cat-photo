@@ -4,22 +4,6 @@ const fetch = require("node-fetch");
 const puppeteer = require("puppeteer");
 const inquirer = require("inquirer");
 
-inquirer
-  .prompt([
-    {
-      type: "list",
-      name: "memo",
-      message: "Are you a dog or cat person?:",
-      choices: ["🐶", "🐱", "🐶  and 🐱  aren't looking for a fight."]
-    }
-  ])
-  .then(answers => {
-    takeScreenshot(answers["memo"]);
-  })
-  .catch(error => {
-    console.error(error);
-  });
-
 async function getDogPhoto(page) {
   const response = await fetch("https://dog.ceo/api/breeds/image/random");
   const data = await response.json();
@@ -51,3 +35,23 @@ async function takeScreenshot(choice) {
   }
   await browser.close();
 }
+
+function main() {
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "memo",
+        message: "Are you a dog or cat person?:",
+        choices: ["🐶", "🐱", "🐶  and 🐱  aren't looking for a fight."]
+      }
+    ])
+    .then(answers => {
+      takeScreenshot(answers["memo"]);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
+main();
