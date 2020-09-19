@@ -1,0 +1,32 @@
+{
+  "name": "dog-cat-photo",
+  "version": "1.0.0",
+  "description": "Get a screenshot of the dog and cat image",
+  "main": "main.js",
+  "bin": {
+    "dog-cat-photo": "./main.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hogucc/dog-cat-photo.git"
+  },
+  "keywords": [
+    "dog",
+    "cat",
+    "screenshot"
+  ],
+  "author": "hogucc",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hogucc/dog-cat-photo/issues"
+  },
+  "homepage": "https://github.com/hogucc/dog-cat-photo#readme",
+  "dependencies": {
+    "inquirer": "^7.3.3",
+    "node-fetch": "^2.6.1",
+    "puppeteer": "^5.3.0"
+  }
+}
