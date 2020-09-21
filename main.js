@@ -3,19 +3,25 @@
 const fetch = require("node-fetch");
 const puppeteer = require("puppeteer");
 const inquirer = require("inquirer");
+const dogPhotoFileName = "dog.png";
+const catPhotoFileName = "cat.png";
 
 async function getDogPhoto(page) {
   const response = await fetch("https://dog.ceo/api/breeds/image/random");
   const data = await response.json();
   await page.goto(data.message);
-  await page.screenshot({ path: "dog.png" });
+  await page.screenshot({ path: dogPhotoFileName });
 }
 
 async function getCatPhoto(page) {
   const response = await fetch("https://aws.random.cat/meow");
   const data = await response.json();
   await page.goto(data.file);
-  await page.screenshot({ path: "cat.png" });
+  await page.screenshot({ path: catPhotoFileName });
+}
+
+async function displaySavedPhotoMessage(photo_type) {
+  console.log(`saved the picture to ${process.cwd()}/${photo_type}`);
 }
 
 async function takeScreenshot(choice) {
@@ -25,14 +31,19 @@ async function takeScreenshot(choice) {
   if (choice === "🐶") {
     await getDogPhoto(page);
     console.log("got a picture of 🐶");
+    await displaySavedPhotoMessage(dogPhotoFileName);
   } else if (choice === "🐱") {
     await getCatPhoto(page);
     console.log("got a picture of 🐱");
+    await displaySavedPhotoMessage(catPhotoFileName);
   } else {
     await getDogPhoto(page);
     await getCatPhoto(page);
     console.log(`got a picture of 🐶 🐱`);
+    await displaySavedPhotoMessage(dogPhotoFileName);
+    await displaySavedPhotoMessage(catPhotoFileName);
   }
+
   await browser.close();
 }
 
