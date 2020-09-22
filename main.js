@@ -5,23 +5,25 @@ const puppeteer = require("puppeteer");
 const inquirer = require("inquirer");
 const dogPhotoFileName = "dog.png";
 const catPhotoFileName = "cat.png";
+const dogPhotoURL = "https://dog.ceo/api/breeds/image/random";
+const catPhotoURL = "https://aws.random.cat/meow";
 
 async function getDogPhoto(page) {
-  const response = await fetch("https://dog.ceo/api/breeds/image/random");
+  const response = await fetch(dogPhotoURL);
   const data = await response.json();
   await page.goto(data.message);
   await page.screenshot({ path: dogPhotoFileName });
 }
 
 async function getCatPhoto(page) {
-  const response = await fetch("https://aws.random.cat/meow");
+  const response = await fetch(catPhotoURL);
   const data = await response.json();
   await page.goto(data.file);
   await page.screenshot({ path: catPhotoFileName });
 }
 
-async function displaySavedPhotoMessage(photo_type) {
-  console.log(`saved the picture to ${process.cwd()}/${photo_type}`);
+async function displaySavedPhotoMessage(photoFileName) {
+  console.log(`saved the picture to ${process.cwd()}/${photoFileName}`);
 }
 
 async function takeScreenshot(choice) {
